@@ -56,17 +56,7 @@ const certifications = ref([
 
 <template>
   <div class="portfolio-page">
-    <!-- Navbar / Navegación principal -->
-    <nav class="navbar">
-      <div class="nav-brand">IT Support Portfolio</div>
-      <div class="nav-links">
-        <a href="#about">Sobre mí</a>
-        <a href="#dashboard">Live Demo</a>
-        <a href="#projects">Casos de Éxito</a>
-        <a href="#certs">Certificaciones</a>
-        <a href="#contact" class="btn-nav">Contacto</a>
-      </div>
-    </nav>
+
 
     <!-- 1. HERO SECTION / Presentación -->
     <header class="hero-section" id="about">
@@ -183,23 +173,7 @@ const certifications = ref([
   line-height: 1.6;
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-brand { font-weight: 700; font-size: 1.2rem; color: #2563eb; }
-.nav-links { display: flex; gap: 1.5rem; align-items: center; }
-.nav-links a { text-decoration: none; color: #475569; font-weight: 500; }
-.nav-links a:hover { color: #2563eb; }
-.btn-nav { background: #2563eb; color: white !important; padding: 6px 14px; border-radius: 6px; }
+
 
 /* Hero Section */
 .hero-section {
