@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
+// Imagen de perfil (coloca tu foto dentro de la carpeta /public de tu proyecto, ej: public/profile.jpg)
+const profileImage = ref('/img/foto_perfil.jpg')
+
 const coreSkills = [
   { category: 'Mesa de Ayuda & Ticketing', items: ['GLPI', 'Trazabilidad y Escalamiento N2', 'Atención N1', 'Creación de Base de Conocimiento'] },
   { category: 'Sistemas & Entornos Cloud', items: ['Microsoft 365 Admin', 'Google Workspace', 'Microsoft Teams', 'Nube GCP (Básico)'] },
@@ -32,25 +37,41 @@ const experienceTimeline = [
 <template>
   <div class="about-page">
     <div class="container">
-      <header class="about-header">
-        <h1>Odette Gallo Martínez</h1>
-        <h2>Analista de Soporte TI Nivel 1 | Mesa de Ayuda | Service Desk</h2>
-        <p class="summary">
-          Certificada en <strong>Google IT Support Professional</strong> y con más de 2 años de experiencia directa atendiendo usuarios, gestionando incidentes N1 con GLPI y administrando identidades en M365 y Google Workspace. Combino mi formación en Administración Pública con habilidades en desarrollo Front-End para optimizar procesos operativos y mejorar SLAs en mesas de ayuda.
-        </p>
+
+      <!-- 1. HEADER DE PERFIL CON FOTO -->
+      <header class="profile-card">
+        <div class="avatar-container">
+          <img :src="profileImage" alt="Odette Gallo Martínez" class="profile-img" />
+          <span class="status-indicator" title="Disponible para trabajar"></span>
+        </div>
+        <div class="profile-info">
+          <span class="badge-role">Analista de Soporte TI Nivel 1 | Mesa de Ayuda</span>
+          <h1>Odette Gallo Martínez</h1>
+          <p class="summary">
+            Certificada en <strong>Google IT Support Professional</strong> y con más de 2 años de experiencia directa atendiendo usuarios, gestionando incidentes N1 con GLPI y administrando identidades en M365 y Google Workspace. Combino mi formación en Administración Pública con habilidades en desarrollo Front-End para optimizar procesos operativos.
+          </p>
+          <div class="contact-actions">
+            <a href="mailto:odettegallo@outlook.es" class="btn-primary">✉️ Contactar</a>
+            <a href="https://docs.google.com/document/d/1ZVogLKvQpSm6wbemcgyfRbujwxy0rzPt/edit?usp=sharing&ouid=101854029669132058599&rtpof=true&sd=true" target="_blank" class="btn-secondary">📄 Ver CV</a>
+          </div>
+        </div>
       </header>
 
+      <!-- 2. PROPUESTA DE VALOR (CARD) -->
       <section class="section">
-        <h3>💡 Propuesta de Valor</h3>
-        <p class="value-prop">
-          Aporto un enfoque metódico para la gestión de tickets, priorización de requerimientos y continuidad operativa. Mi combinación de conocimiento de administración pública y desarrollo Front-End me permite entender la experiencia del usuario final y crear herramientas simples de automatización interna.
-        </p>
+        <div class="card highlight-card">
+          <h3>💡 Propuesta de Valor</h3>
+          <p>
+            Aporto un enfoque metódico para la gestión de tickets, priorización de requerimientos y continuidad operativa. Mi combinación de conocimiento de administración pública y desarrollo Front-End me permite entender la experiencia del usuario final y crear herramientas simples de automatización interna.
+          </p>
+        </div>
       </section>
 
+      <!-- 3. COMPETENCIAS TÉCNICAS (CARDS GRID) -->
       <section class="section">
         <h3>🛠️ Competencias Técnicas & Herramientas</h3>
         <div class="skills-grid">
-          <div v-for="skillGroup in coreSkills" :key="skillGroup.category" class="skill-card">
+          <div v-for="skillGroup in coreSkills" :key="skillGroup.category" class="card skill-card">
             <h4>{{ skillGroup.category }}</h4>
             <ul>
               <li v-for="item in skillGroup.items" :key="item">{{ item }}</li>
@@ -59,13 +80,18 @@ const experienceTimeline = [
         </div>
       </section>
 
+      <!-- 4. EXPERIENCIA LABORAL (CARDS) -->
       <section class="section">
         <h3>💼 Experiencia Destacada en TI</h3>
-        <div class="timeline">
-          <div v-for="job in experienceTimeline" :key="job.company" class="timeline-item">
-            <span class="period">{{ job.period }}</span>
-            <h4>{{ job.role }}</h4>
-            <span class="company">{{ job.company }}</span>
+        <div class="experience-list">
+          <div v-for="job in experienceTimeline" :key="job.company" class="card job-card">
+            <div class="job-header">
+              <div>
+                <h4>{{ job.role }}</h4>
+                <span class="company">{{ job.company }}</span>
+              </div>
+              <span class="period-badge">{{ job.period }}</span>
+            </div>
             <ul>
               <li v-for="achievement in job.achievements" :key="achievement">{{ achievement }}</li>
             </ul>
@@ -73,23 +99,37 @@ const experienceTimeline = [
         </div>
       </section>
 
+      <!-- 5. EDUCACIÓN Y CERTIFICACIONES (CARDS GRID) -->
       <section class="section">
         <h3>🎓 Educación & Certificaciones Principales</h3>
         <div class="edu-grid">
-          <div class="edu-card highlight">
-            <h4>Google IT Support Professional Certificate</h4>
-            <p>Google / Coursera (2024) — Redes, SO, Infraestructura y Ciberseguridad.</p>
+          <div class="card edu-card google-cert">
+            <div class="cert-header">
+              <span class="icon">🏆</span>
+              <h4>Google IT Support Professional Certificate</h4>
+            </div>
+            <p>Google / Coursera (2024)</p>
+            <small>Redes, Sistemas Operativos, Infraestructura y Ciberseguridad.</small>
           </div>
-          <div class="edu-card">
-            <h4>Bootcamp Desarrollo de Aplicaciones Front-End</h4>
-            <p>Talento Digital para Chile / Academia Desafío Latam (2025-2026).</p>
+          <div class="card edu-card">
+            <div class="cert-header">
+              <span class="icon">💻</span>
+              <h4>Bootcamp Desarrollo Front-End</h4>
+            </div>
+            <p>Talento Digital / Desafío Latam</p>
+            <small>Desarrollo web moderno con Vue.js y TypeScript (2025-2026).</small>
           </div>
-          <div class="edu-card">
-            <h4>Administradora Pública & Licenciada</h4>
-            <p>Universidad de Valparaíso (2012 - 2017).</p>
+          <div class="card edu-card">
+            <div class="cert-header">
+              <span class="icon">🏛️</span>
+              <h4>Administración Pública</h4>
+            </div>
+            <p>Universidad de Valparaíso</p>
+            <small>Licenciatura y Título Profesional (2012 - 2017).</small>
           </div>
         </div>
       </section>
+
     </div>
   </div>
 </template>
@@ -99,71 +139,155 @@ const experienceTimeline = [
   padding: 3rem 1.5rem;
   background: #f8fafc;
   color: #1e293b;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
 }
 
-.about-header h1 {
-  font-size: 2.2rem;
-  color: #0f172a;
-  margin-bottom: 0.2rem;
+/* Base Card Style */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.about-header h2 {
-  font-size: 1.1rem;
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 1. Profile Header Card */
+.profile-card {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.avatar-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #eff6ff;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15);
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  background-color: #22c55e;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+}
+
+.profile-info h1 {
+  font-size: 1.8rem;
+  color: #0f172a;
+  margin: 0.4rem 0;
+}
+
+.badge-role {
+  background: #eff6ff;
   color: #2563eb;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
   font-weight: 600;
-  margin-bottom: 1rem;
 }
 
 .summary {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #334155;
-  background: #ffffff;
-  padding: 1.25rem;
-  border-radius: 8px;
-  border-left: 4px solid #2563eb;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0.8rem 0 1.2rem;
 }
 
+.contact-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  color: #334155;
+  padding: 8px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Sections */
 .section {
-  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .section h3 {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: #0f172a;
   margin-bottom: 1rem;
 }
 
-.value-prop {
-  color: #475569;
+/* Propuesta de Valor */
+.highlight-card {
+  border-left: 4px solid #2563eb;
+  background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.highlight-card h3 {
+  margin-top: 0;
+}
+
+.highlight-card p {
+  margin: 0;
+  color: #334155;
   line-height: 1.6;
 }
 
+/* Skills Grid */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 1rem;
-}
-
-.skill-card {
-  background: #ffffff;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
 }
 
 .skill-card h4 {
   font-size: 0.95rem;
   color: #1e293b;
-  margin-bottom: 0.5rem;
-  border-bottom: 2px solid #eff6ff;
-  padding-bottom: 4px;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f1f5f9;
 }
 
 .skill-card ul {
@@ -174,74 +298,119 @@ const experienceTimeline = [
 
 .skill-card li {
   font-size: 0.85rem;
-  color: #64748b;
-  padding: 3px 0;
+  color: #475569;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
 }
 
-.timeline {
+.skill-card li::before {
+  content: "•";
+  color: #2563eb;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+}
+
+/* Experience List */
+.experience-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
-.timeline-item {
-  background: #ffffff;
-  padding: 1.25rem;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.period {
-  font-size: 0.8rem;
-  color: #2563eb;
-  font-weight: 600;
-}
-
-.timeline-item h4 {
-  margin: 0.2rem 0;
+.job-header h4 {
+  margin: 0;
+  font-size: 1.05rem;
   color: #0f172a;
 }
 
 .company {
   font-size: 0.85rem;
   color: #64748b;
-  display: block;
-  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
-.timeline-item ul {
-  padding-left: 1.2rem;
+.period-badge {
+  background: #f1f5f9;
+  color: #2563eb;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.job-card ul {
   margin: 0;
-  font-size: 0.9rem;
+  padding-left: 1.2rem;
   color: #334155;
+  font-size: 0.9rem;
 }
 
+.job-card li {
+  margin-bottom: 0.4rem;
+}
+
+/* Education Grid */
 .edu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
 }
 
-.edu-card {
-  background: #ffffff;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
+.cert-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
-.edu-card.highlight {
-  border-color: #3b82f6;
+.cert-header h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.google-cert {
+  border-color: #93c5fd;
   background: #eff6ff;
 }
 
-.edu-card h4 {
-  font-size: 0.95rem;
-  margin-bottom: 0.3rem;
+.edu-card p {
+  margin: 0 0 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2563eb;
 }
 
-.edu-card p {
-  font-size: 0.85rem;
+.edu-card small {
   color: #64748b;
-  margin: 0;
+  font-size: 0.8rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .contact-actions {
+    justify-content: center;
+  }
+
+  .job-header {
+    flex-direction: column;
+  }
 }
 </style>
