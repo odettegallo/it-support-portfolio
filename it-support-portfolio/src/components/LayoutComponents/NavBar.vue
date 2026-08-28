@@ -29,7 +29,7 @@ const closeMenu = () => {
 
     <div class="nav-links" :class="{ 'is-active': isMenuOpen }">
       <RouterLink to="/" @click="closeMenu">Sobre Mí & CV</RouterLink>
-      <RouterLink to="/home" @click="closeMenu">Inicio</RouterLink>
+      <RouterLink to="/dashboard" @click="closeMenu">Dashboard</RouterLink>
       <a href="/#dashboard" @click="closeMenu">Mesa de Ayuda Demo</a>
       <a href="/#projects" @click="closeMenu">Casos de Éxito</a>
 
