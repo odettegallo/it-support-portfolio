@@ -15,24 +15,25 @@ const closeMenu = () => {
 <template>
   <nav class="navbar">
     <div class="nav-brand">
-      <RouterLink to="/" @click="closeMenu">IT Support Portfolio</RouterLink>
+      <RouterLink to="/about" @click="closeMenu">
+        <span class="brand-name">Odette Gallo</span>
+        <span class="brand-title">| Soporte TI N1</span>
+      </RouterLink>
     </div>
 
-    <!-- Botón de Hamburguesa (Solo visible en pantallas pequeñas) -->
     <button class="hamburger-btn" @click="toggleMenu" aria-label="Abrir menú">
       <span class="bar" :class="{ 'open': isMenuOpen }"></span>
       <span class="bar" :class="{ 'open': isMenuOpen }"></span>
       <span class="bar" :class="{ 'open': isMenuOpen }"></span>
     </button>
 
-    <!-- Enlaces de navegación -->
     <div class="nav-links" :class="{ 'is-active': isMenuOpen }">
+      <RouterLink to="/about" @click="closeMenu">Sobre Mí & CV</RouterLink>
       <RouterLink to="/" @click="closeMenu">Inicio</RouterLink>
-      <RouterLink to="/about" @click="closeMenu">Sobre mí</RouterLink>
-      <a href="/#dashboard" @click="closeMenu">Live Demo</a>
+      <a href="/#dashboard" @click="closeMenu">Mesa de Ayuda Demo</a>
       <a href="/#projects" @click="closeMenu">Casos de Éxito</a>
-      <a href="/#certs" @click="closeMenu">Certificaciones</a>
-      <a href="/#contact" class="btn-nav" @click="closeMenu">Contacto</a>
+
+      <a href="mailto:odettegallo@outlook.es" class="btn-nav" @click="closeMenu">Contacto Directo</a>
     </div>
   </nav>
 </template>
@@ -43,18 +44,30 @@ const closeMenu = () => {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
+  background: #0f172a;
+  border-bottom: 1px solid #1e293b;
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
 .nav-brand a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-name {
   font-weight: 700;
   font-size: 1.2rem;
-  color: #2563eb;
-  text-decoration: none;
+  color: #ffffff;
+}
+
+.brand-title {
+  font-size: 0.9rem;
+  color: #3b82f6;
+  font-weight: 500;
 }
 
 .nav-links {
@@ -65,23 +78,28 @@ const closeMenu = () => {
 
 .nav-links a {
   text-decoration: none;
-  color: #475569;
+  color: #cbd5e1;
   font-weight: 500;
+  font-size: 0.95rem;
   transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: #2563eb;
+  color: #3b82f6;
 }
 
 .btn-nav {
   background: #2563eb;
   color: white !important;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 6px;
+  font-weight: 600 !important;
 }
 
-/* Botón Hamburguesa */
+.btn-nav:hover {
+  background: #1d4ed8;
+}
+
 .hamburger-btn {
   display: none;
   flex-direction: column;
@@ -91,34 +109,22 @@ const closeMenu = () => {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
 }
 
 .bar {
   height: 3px;
   width: 100%;
-  background-color: #1e293b;
+  background-color: #ffffff;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
 
-/* Animación del botón a 'X' */
-.bar.open:nth-child(1) {
-  transform: translateY(7.5px) rotate(45deg);
-}
-.bar.open:nth-child(2) {
-  opacity: 0;
-}
-.bar.open:nth-child(3) {
-  transform: translateY(-7.5px) rotate(-45deg);
-}
+.bar.open:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.bar.open:nth-child(2) { opacity: 0; }
+.bar.open:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-/* Adaptación Responsive */
 @media (max-width: 768px) {
-  .hamburger-btn {
-    display: flex;
-  }
-
+  .hamburger-btn { display: flex; }
   .nav-links {
     display: none;
     flex-direction: column;
@@ -126,16 +132,12 @@ const closeMenu = () => {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #0f172a;
     padding: 1.5rem 2rem;
-    border-bottom: 1px solid #e2e8f0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #1e293b;
     align-items: flex-start;
     gap: 1.2rem;
   }
-
-  .nav-links.is-active {
-    display: flex;
-  }
+  .nav-links.is-active { display: flex; }
 }
 </style>

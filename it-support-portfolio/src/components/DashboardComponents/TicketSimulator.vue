@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTicketStore } from '../stores/useTicketStore'
+import { useTicketStore } from '../../stores/useTicketStore'
 
 const ticketStore = useTicketStore()
 </script>

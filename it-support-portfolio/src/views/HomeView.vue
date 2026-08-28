@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import SystemStatusBadge from '@/components/SystemStatusBadge.vue'
-import TicketList from '@/components/TicketList.vue'
-import UserProvisioning from '@/components/UserProvisioning.vue'
-import KnowledgeBaseCard from '@/components/KnowledgeBaseCard.vue'
+import SystemStatusBadge from '@/components/DashboardComponents/SystemStatusBadge.vue'
+import TicketList from '@/components/DashboardComponents/TicketList.vue'
+import UserProvisioning from '@/components/DashboardComponents/UserProvisioning.vue'
+import KnowledgeBaseCard from '@/components/DashboardComponents/KnowledgeBaseCard.vue'
 
 // Estado de servicios para el Dashboard simulado
 const systemServices = ref([
@@ -148,19 +148,7 @@ const certifications = ref([
     </section>
 
     <!-- 5. SECCIÓN DE CONTACTO & DATOS -->
-    <footer class="contact-section" id="contact">
-      <div class="contact-content">
-        <h2>📫 Hablemos de oportunidades</h2>
-        <p>¿Buscas una Analista de Soporte TI capacitada para optimizar tus procesos operativos y resolver incidentes con rapidez?</p>
 
-        <div class="contact-links">
-          <a href="mailto:tu-correo@dominio.com" class="contact-btn">✉️ Enviar un Correo</a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener" class="contact-btn outline">🔗 Perfil de LinkedIn</a>
-          <a href="https://github.com" target="_blank" rel="noopener" class="contact-btn outline">💻 Perfil de GitHub</a>
-        </div>
-        <p class="copyright">© 2026 - Portafolio Profesional de Soporte TI N1</p>
-      </div>
-    </footer>
   </div>
 </template>
 
