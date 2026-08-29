@@ -54,12 +54,6 @@ const trainingCategories: TrainingCategory[] = [
     title: '🛡️ TI & Ciberseguridad',
     courses: [
       {
-        name: 'Certificación Profesional de Soporte de TI de Google',
-        provider: 'Google (Coursera)',
-        date: 'Julio 2024',
-        details: 'Aspectos básicos de asistencia, redes informáticas, sistemas operativos, infraestructura de TI y seguridad.'
-      },
-      {
         name: 'Transformación Digital con IA y Automatización',
         provider: 'Academia Desafío Latam',
         duration: '150 hrs',
