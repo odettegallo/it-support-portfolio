@@ -1,8 +1,23 @@
 <!-- src/views/HomeView.vue -->
+<!-- src/views/HomeView.vue -->
 <script setup lang="ts">
 import { ref } from 'vue'
 
 const profileImage = ref('/img/foto_perfil.jpg')
+
+// 1. Interfaz explícita para evitar errores de TypeScript
+interface Course {
+  name: string
+  provider: string
+  date: string
+  duration?: string
+  details?: string
+}
+
+interface TrainingCategory {
+  title: string
+  courses: Course[]
+}
 
 const coreSkills = [
   { category: 'Mesa de Ayuda & Ticketing', items: ['GLPI', 'Trazabilidad y Escalamiento N2', 'Atención N1', 'Creación de Base de Conocimiento'] },
@@ -32,6 +47,94 @@ const experienceTimeline = [
     ]
   }
 ]
+
+// 2. Tipado estricto aplicado aquí
+const trainingCategories: TrainingCategory[] = [
+  {
+    title: '🛡️ TI & Ciberseguridad',
+    courses: [
+      {
+        name: 'Certificación Profesional de Soporte de TI de Google',
+        provider: 'Google (Coursera)',
+        date: 'Julio 2024',
+        details: 'Aspectos básicos de asistencia, redes informáticas, sistemas operativos, infraestructura de TI y seguridad.'
+      },
+      {
+        name: 'Transformación Digital con IA y Automatización',
+        provider: 'Academia Desafío Latam',
+        duration: '150 hrs',
+        date: 'Diciembre 2025'
+      },
+      {
+        name: 'MSC Linux 101',
+        provider: '8dot8 Academy & TTPSEC SPA',
+        duration: '30 hrs',
+        date: 'Abril 2026'
+      },
+      {
+        name: 'Rol del Analista SOC',
+        provider: '8dot8 Academy & TTPSEC SPA',
+        duration: '15 hrs',
+        date: 'Abril 2026'
+      },
+      {
+        name: 'Ciberseguridad: Phishing y Fraude Digital',
+        provider: 'Academia CEA',
+        duration: '12 hrs',
+        date: 'Abril 2026'
+      },
+      {
+        name: 'Fundamentos en Ciberseguridad',
+        provider: 'Microsoft & LinkedIn',
+        duration: '5.5 hrs',
+        date: 'Noviembre 2024'
+      }
+    ]
+  },
+  {
+    title: '🏢 Entornos Corporativos & Datos',
+    courses: [
+      {
+        name: 'Gestión de Datos con Microsoft 365',
+        provider: 'Microsoft & LinkedIn',
+        duration: '1.7 hrs',
+        date: 'Enero 2025'
+      },
+      {
+        name: 'Excel Aplicado a los Negocios (Avanzado)',
+        provider: 'Universidad Austral (Coursera)',
+        date: 'Agosto 2020'
+      },
+      {
+        name: 'Estatuto Administrativo Avanzado',
+        provider: 'Academia CEA',
+        duration: '40 hrs',
+        date: 'Diciembre 2025'
+      }
+    ]
+  },
+  {
+    title: '🤝 Gestión de Servicio & Habilidades Blandas',
+    courses: [
+      {
+        name: 'Habilidades Socioemocionales para la Empleabilidad',
+        provider: 'Eidos Global, Accenture & Skills Builder',
+        duration: '25 hrs',
+        date: 'Julio 2026'
+      },
+      {
+        name: 'Técnicas de Servicio Orientadas al Cliente',
+        provider: 'Sercotec',
+        date: 'Abril 2023'
+      },
+      {
+        name: 'Conflict Resolution Skills',
+        provider: 'UC Irvine (Coursera)',
+        date: 'Agosto 2020'
+      }
+    ]
+  }
+]
 </script>
 
 <template>
@@ -48,7 +151,7 @@ const experienceTimeline = [
           <span class="badge-role">Analista de Soporte TI Nivel 1 | Mesa de Ayuda</span>
           <h1>Odette Gallo Martínez</h1>
           <p class="summary">
-            Certificada en <strong>Google IT Support Professional</strong>[cite: 2] y con más de 2 años de experiencia directa atendiendo usuarios, gestionando incidentes N1 con GLPI y administrando identidades en M365 y Google Workspace. Combino mi formación en Administración Pública con habilidades en desarrollo Front-End para optimizar procesos operativos.
+            Certificada en <strong>Google IT Support Professional</strong> y con más de 2 años de experiencia directa atendiendo usuarios, gestionando incidentes N1 con GLPI y administrando identidades en M365 y Google Workspace. Combino mi formación en Administración Pública con habilidades en desarrollo Front-End para optimizar procesos operativos.
           </p>
           <div class="contact-actions">
             <RouterLink to="/dashboard" class="btn-primary">🖥️ Ver Dashboard en Vivo</RouterLink>
@@ -99,9 +202,9 @@ const experienceTimeline = [
         </div>
       </section>
 
-      <!-- 5. EDUCACIÓN Y CERTIFICACIONES -->
+      <!-- 5. EDUCACIÓN PRINCIPAL -->
       <section class="section">
-        <h3>🎓 Educación & Certificaciones Principales</h3>
+        <h3>🎓 Educación Principal</h3>
         <div class="edu-grid">
           <div class="card edu-card google-cert">
             <div class="cert-header">
@@ -126,6 +229,30 @@ const experienceTimeline = [
             </div>
             <p>Universidad de Valparaíso</p>
             <small>Licenciatura y Título Profesional (2012 - 2017).</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. CAPACITACIONES Y CERTIFICACIONES -->
+      <section class="section">
+        <h3>📜 Capacitaciones & Formación Continua</h3>
+        <div class="training-grid">
+          <div v-for="cat in trainingCategories" :key="cat.title" class="card training-category-card">
+            <h4>{{ cat.title }}</h4>
+            <div class="courses-list">
+              <div v-for="course in cat.courses" :key="course.name" class="course-item">
+                <div class="course-header">
+                  <span class="course-name">{{ course.name }}</span>
+                  <span v-if="course.duration" class="badge-duration">{{ course.duration }}</span>
+                </div>
+                <div class="course-meta">
+                  <span>{{ course.provider }}</span>
+                  <span class="dot">•</span>
+                  <span>{{ course.date }}</span>
+                </div>
+                <p v-if="course.details" class="course-details">{{ course.details }}</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -380,6 +507,82 @@ const experienceTimeline = [
   font-size: 0.8rem;
 }
 
+/* ESTILOS DE LA SECCIÓN DE CAPACITACIONES */
+.training-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.training-category-card h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.05rem;
+  color: #0f172a;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 0.5rem;
+}
+
+.courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.course-item {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.course-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.course-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #1e293b;
+}
+
+.badge-duration {
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.course-meta {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.dot {
+  color: #cbd5e1;
+}
+
+.course-details {
+  font-size: 0.82rem;
+  color: #475569;
+  margin: 0.4rem 0 0;
+  background: #f8fafc;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+}
+
 @media (max-width: 640px) {
   .profile-card {
     flex-direction: column;
@@ -392,6 +595,10 @@ const experienceTimeline = [
   }
 
   .job-header {
+    flex-direction: column;
+  }
+
+  .course-header {
     flex-direction: column;
   }
 }
