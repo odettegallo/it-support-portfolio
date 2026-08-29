@@ -1,7 +1,7 @@
+<!-- src/views/HomeView.vue -->
 <script setup lang="ts">
 import { ref } from 'vue'
 
-// Imagen de perfil (coloca tu foto dentro de la carpeta /public de tu proyecto, ej: public/profile.jpg)
 const profileImage = ref('/img/foto_perfil.jpg')
 
 const coreSkills = [
@@ -35,7 +35,7 @@ const experienceTimeline = [
 </script>
 
 <template>
-  <div class="about-page">
+  <div class="home-page">
     <div class="container">
 
       <!-- 1. HEADER DE PERFIL CON FOTO -->
@@ -48,16 +48,16 @@ const experienceTimeline = [
           <span class="badge-role">Analista de Soporte TI Nivel 1 | Mesa de Ayuda</span>
           <h1>Odette Gallo Martínez</h1>
           <p class="summary">
-            Certificada en <strong>Google IT Support Professional</strong> y con más de 2 años de experiencia directa atendiendo usuarios, gestionando incidentes N1 con GLPI y administrando identidades en M365 y Google Workspace. Combino mi formación en Administración Pública con habilidades en desarrollo Front-End para optimizar procesos operativos.
+            Certificada en <strong>Google IT Support Professional</strong>[cite: 2] y con más de 2 años de experiencia directa atendiendo usuarios, gestionando incidentes N1 con GLPI y administrando identidades en M365 y Google Workspace. Combino mi formación en Administración Pública con habilidades en desarrollo Front-End para optimizar procesos operativos.
           </p>
           <div class="contact-actions">
-            <a href="mailto:odettegallo@outlook.es" class="btn-primary">✉️ Contactar</a>
-            <a href="https://docs.google.com/document/d/1ZVogLKvQpSm6wbemcgyfRbujwxy0rzPt/edit?usp=sharing&ouid=101854029669132058599&rtpof=true&sd=true" target="_blank" class="btn-secondary">📄 Ver CV</a>
+            <RouterLink to="/dashboard" class="btn-primary">🖥️ Ver Dashboard en Vivo</RouterLink>
+            <a href="https://docs.google.com/document/d/1ZVogLKvQpSm6wbemcgyfRbujwxy0rzPt/edit?usp=sharing&ouid=101854029669132058599&rtpof=true&sd=true" target="_blank" rel="noopener" class="btn-secondary">📄 Ver CV</a>
           </div>
         </div>
       </header>
 
-      <!-- 2. PROPUESTA DE VALOR (CARD) -->
+      <!-- 2. PROPUESTA DE VALOR -->
       <section class="section">
         <div class="card highlight-card">
           <h3>💡 Propuesta de Valor</h3>
@@ -67,7 +67,7 @@ const experienceTimeline = [
         </div>
       </section>
 
-      <!-- 3. COMPETENCIAS TÉCNICAS (CARDS GRID) -->
+      <!-- 3. COMPETENCIAS TÉCNICAS -->
       <section class="section">
         <h3>🛠️ Competencias Técnicas & Herramientas</h3>
         <div class="skills-grid">
@@ -80,7 +80,7 @@ const experienceTimeline = [
         </div>
       </section>
 
-      <!-- 4. EXPERIENCIA LABORAL (CARDS) -->
+      <!-- 4. EXPERIENCIA LABORAL -->
       <section class="section">
         <h3>💼 Experiencia Destacada en TI</h3>
         <div class="experience-list">
@@ -99,7 +99,7 @@ const experienceTimeline = [
         </div>
       </section>
 
-      <!-- 5. EDUCACIÓN Y CERTIFICACIONES (CARDS GRID) -->
+      <!-- 5. EDUCACIÓN Y CERTIFICACIONES -->
       <section class="section">
         <h3>🎓 Educación & Certificaciones Principales</h3>
         <div class="edu-grid">
@@ -135,7 +135,7 @@ const experienceTimeline = [
 </template>
 
 <style scoped>
-.about-page {
+.home-page {
   padding: 3rem 1.5rem;
   background: #f8fafc;
   color: #1e293b;
@@ -147,7 +147,6 @@ const experienceTimeline = [
   margin: 0 auto;
 }
 
-/* Base Card Style */
 .card {
   background: #ffffff;
   border-radius: 12px;
@@ -162,7 +161,6 @@ const experienceTimeline = [
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* 1. Profile Header Card */
 .profile-card {
   display: flex;
   gap: 2rem;
@@ -247,7 +245,6 @@ const experienceTimeline = [
   font-weight: 600;
 }
 
-/* Sections */
 .section {
   margin-bottom: 2.5rem;
 }
@@ -258,23 +255,11 @@ const experienceTimeline = [
   margin-bottom: 1rem;
 }
 
-/* Propuesta de Valor */
 .highlight-card {
   border-left: 4px solid #2563eb;
   background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%);
 }
 
-.highlight-card h3 {
-  margin-top: 0;
-}
-
-.highlight-card p {
-  margin: 0;
-  color: #334155;
-  line-height: 1.6;
-}
-
-/* Skills Grid */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -312,7 +297,6 @@ const experienceTimeline = [
   width: 1em;
 }
 
-/* Experience List */
 .experience-list {
   display: flex;
   flex-direction: column;
@@ -360,7 +344,6 @@ const experienceTimeline = [
   margin-bottom: 0.4rem;
 }
 
-/* Education Grid */
 .edu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -397,7 +380,6 @@ const experienceTimeline = [
   font-size: 0.8rem;
 }
 
-/* Responsive adjustments */
 @media (max-width: 640px) {
   .profile-card {
     flex-direction: column;

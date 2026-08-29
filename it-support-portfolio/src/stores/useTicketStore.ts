@@ -1,52 +1,53 @@
+// src/stores/useTicketStore.ts
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
 export interface Ticket {
   id: string
   title: string
-  category: 'Redes' | 'M365' | 'Hardware' | 'Acceso'
-  priority: 'Baja' | 'Media' | 'Alta' | 'Crítica'
+  category: 'Redes' | 'M365' | 'Acceso'
+  priority: 'crítica' | 'alta' | 'media' | 'baja'
   status: 'Abierto' | 'En Proceso' | 'Resuelto'
-  createdAt: string
   slaDeadline: string
 }
 
 export const useTicketStore = defineStore('tickets', () => {
+  const filterCategory = ref<string>('Todas')
+
   const tickets = ref<Ticket[]>([
     {
-      id: 'INC-1001',
-      title: 'Fallo de conexión VPN al teletrabajar',
-      category: 'Redes',
-      priority: 'Alta',
-      status: 'Abierto',
-      createdAt: '2026-08-27 09:00',
-      slaDeadline: '4h restantes'
-    },
-    {
-      id: 'INC-1002',
-      title: 'Reset de contraseña y asignación de licencia M365',
+      id: 'INC-101',
+      title: 'Fallo de autenticación en M365 post-actualización',
       category: 'M365',
-      priority: 'Media',
-      status: 'En Proceso',
-      createdAt: '2026-08-27 10:15',
-      slaDeadline: '6h restantes'
+      priority: 'alta',
+      status: 'Abierto',
+      slaDeadline: '15 mins'
     },
     {
-      id: 'INC-1003',
-      title: 'Error de sincronización en servidor de archivos Linux',
+      id: 'INC-102',
+      title: 'Perdida de conectividad con Servidor VPN Corporate',
+      category: 'Redes',
+      priority: 'crítica',
+      status: 'En Proceso',
+      slaDeadline: '30 mins'
+    },
+    {
+      id: 'INC-103',
+      title: 'Solicitud de permisos de acceso a grupo Google Workspace',
       category: 'Acceso',
-      priority: 'Crítica',
-      status: 'Abierto',
-      createdAt: '2026-08-27 10:45',
-      slaDeadline: '1h restante'
+      priority: 'baja',
+      status: 'Resuelto',
+      slaDeadline: '4 horas'
     }
   ])
-
-  const filterCategory = ref<string>('Todas')
 
   const filteredTickets = computed(() => {
     if (filterCategory.value === 'Todas') return tickets.value
     return tickets.value.filter(t => t.category === filterCategory.value)
+  })
+
+  const openTicketsCount = computed(() => {
+    return tickets.value.filter(t => t.status !== 'Resuelto').length
   })
 
   function updateStatus(id: string, newStatus: Ticket['status']) {
@@ -56,14 +57,11 @@ export const useTicketStore = defineStore('tickets', () => {
     }
   }
 
-  function addTicket(newTicket: Omit<Ticket, 'id' | 'createdAt' | 'status'>) {
-    tickets.value.unshift({
-      ...newTicket,
-      id: `INC-${1000 + tickets.value.length + 1}`,
-      status: 'Abierto',
-      createdAt: new Date().toLocaleString()
-    })
+  return {
+    tickets,
+    filterCategory,
+    filteredTickets,
+    openTicketsCount,
+    updateStatus
   }
-
-  return { tickets, filterCategory, filteredTickets, updateStatus, addTicket }
 })

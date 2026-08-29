@@ -1,3 +1,4 @@
+<!-- src/components/Navbar.vue -->
 <script setup lang="ts">
 import { ref } from 'vue'
 
@@ -15,7 +16,7 @@ const closeMenu = () => {
 <template>
   <nav class="navbar">
     <div class="nav-brand">
-      <RouterLink to="/about" @click="closeMenu">
+      <RouterLink to="/" @click="closeMenu">
         <span class="brand-name">Odette Gallo</span>
         <span class="brand-title">| Soporte TI N1</span>
       </RouterLink>
@@ -30,8 +31,7 @@ const closeMenu = () => {
     <div class="nav-links" :class="{ 'is-active': isMenuOpen }">
       <RouterLink to="/" @click="closeMenu">Sobre Mí & CV</RouterLink>
       <RouterLink to="/dashboard" @click="closeMenu">Dashboard</RouterLink>
-      <a href="/#dashboard" @click="closeMenu">Mesa de Ayuda Demo</a>
-      <a href="/#projects" @click="closeMenu">Casos de Éxito</a>
+      <RouterLink to="/projects" @click="closeMenu">Proyectos</RouterLink>
 
       <a href="mailto:odettegallo@outlook.es" class="btn-nav" @click="closeMenu">Contacto Directo</a>
     </div>
@@ -82,6 +82,11 @@ const closeMenu = () => {
   font-weight: 500;
   font-size: 0.95rem;
   transition: color 0.2s ease;
+}
+
+.nav-links a.router-link-active {
+  color: #3b82f6;
+  font-weight: 600;
 }
 
 .nav-links a:hover {

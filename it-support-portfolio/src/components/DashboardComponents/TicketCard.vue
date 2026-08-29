@@ -1,3 +1,4 @@
+<!-- src/components/DashboardComponents/TicketCard.vue -->
 <script setup lang="ts">
 import type { Ticket } from '@/stores/useTicketStore'
 
@@ -11,7 +12,7 @@ const handleStatusChange = (event: Event) => {
 </script>
 
 <template>
-  <div :class="['ticket-card', ticket.priority.toLowerCase()]">
+  <div :class="['ticket-card', ticket.priority]">
     <div class="ticket-header">
       <span class="ticket-id">{{ ticket.id }}</span>
       <span class="ticket-category">{{ ticket.category }}</span>
@@ -19,8 +20,8 @@ const handleStatusChange = (event: Event) => {
     <h4>{{ ticket.title }}</h4>
     <p class="sla">⏱️ SLA: {{ ticket.slaDeadline }}</p>
     <div class="ticket-footer">
-      <label>Estado:</label>
-      <select :value="ticket.status" @change="handleStatusChange">
+      <label :for="'status-' + ticket.id">Estado:</label>
+      <select :id="'status-' + ticket.id" :value="ticket.status" @change="handleStatusChange">
         <option value="Abierto">Abierto</option>
         <option value="En Proceso">En Proceso</option>
         <option value="Resuelto">Resuelto</option>
@@ -42,6 +43,8 @@ const handleStatusChange = (event: Event) => {
 .ticket-card.media { border-left-color: #eab308; }
 .ticket-card.baja { border-left-color: #3b82f6; }
 .ticket-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: #64748b; }
+.ticket-card h4 { font-size: 0.95rem; margin: 8px 0; color: #1e293b; }
 .sla { font-size: 0.85rem; color: #475569; }
-.ticket-footer { margin-top: 10px; display: flex; gap: 8px; align-items: center; }
+.ticket-footer { margin-top: 12px; display: flex; gap: 8px; align-items: center; font-size: 0.85rem; }
+select { padding: 4px 8px; border-radius: 4px; border: 1px solid #cbd5e1; }
 </style>

@@ -9,9 +9,9 @@
       <p>¿Buscas una Analista de Soporte TI capacitada para optimizar tus procesos operativos y resolver incidentes con rapidez?</p>
 
       <div class="contact-links">
-        <a href="mailto:tu-correo@dominio.com" class="contact-btn">✉️ Enviar un Correo</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener" class="contact-btn outline">🔗 Perfil de LinkedIn</a>
-        <a href="https://github.com" target="_blank" rel="noopener" class="contact-btn outline">💻 Perfil de GitHub</a>
+        <a href="mailto:odettegallo@outlook.es" class="contact-btn">✉️ Enviar un Correo</a>
+        <a href="https://www.linkedin.com/in/odette-gallo-mart%C3%ADnez-35913b271/" target="_blank" rel="noopener" class="contact-btn outline">🔗 Perfil de LinkedIn</a>
+        <a href="https://github.com/odettegallo" target="_blank" rel="noopener" class="contact-btn outline">💻 Perfil de GitHub</a>
       </div>
       <p class="copyright">© 2026 - Portafolio Profesional de Soporte TI N1</p>
     </div>
